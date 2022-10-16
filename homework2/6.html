@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Необязательное задание.
+
+Необходимо реализовать функцию, которая будет принимать первым аргументом
+целое положительное число, в следующих трех аргументах функция принимает слова
+в разных склонениях.
+Функция должна возвращать одно из трех переданных в параметры слов подходящее
+под число, которое передано первым аргументом.
+
+Пример:
+console.log(declinationOfNumber(1, "яблоко", "яблока", "яблок")); // "яблоко"
+console.log(declinationOfNumber(2, "мяч", "мяча", "мячей")); // "мяча"
+console.log(declinationOfNumber(5, "стул", "стула", "стульев")); // "стульев"
+
+Функция должна работать с любым словом и любым целым положительным числом.
+Все аргументы, которые будут передаваться функции будут верны.
+-->
+  <script>
+    "use strict";
+
+    function declinationOfNumber(count, one, two, five) {
+      //Ищем еденицы введенного числа
+      const tempOne = +count % 10;
+      //Ищем цифру десятков введенного числа
+      const tempTen = Math.trunc(+count % 100 / 10);
+      /*
+      Итак, 1 - возвращяем one, от 2 до 4 - возвращаем two,  от 4 до 19 и  0 - возвращаем five.
+      Итого, проверяем первую шифру десятков - если 1 то сразу возврат five.
+      если другая цифра - то проверяем все цифры едениц
+      */
+      if (tempTen === 1) {
+        return five
+      } else {
+        if (tempOne > 1 && tempOne <= 4) {
+          return two
+        } else if (tempOne > 4 || tempOne === 0) {
+          return five
+        } else {
+          return one
+        }
+      }
+
+    }
+
+    // Число яблок, можно пробовать поставить свое целое, положительное число.
+    const applesNumber = 5;
+    // Получаем от функции одно из слов "яблоко", "яблока" или "яблок".
+    const word = declinationOfNumber(applesNumber, "яблоко", "яблока", "яблок");
+    // Выводим корректную строку, например:
+    // "У меня есть 1 яблоко."
+    // "У меня есть 2 яблока."
+    // "У меня есть 5 яблок."
+    // При любом целом, положительном числе в applesNumber, строка, которая
+    // выводится в console.log, должна иметь правильное склонение слова "яблоко".
+    console.log(`У меня есть ${applesNumber} ${word}.`);
+    const ballNumber = 3;
+    const wordBall = declinationOfNumber(ballNumber, "мяч", "мячя", "мячей");
+    console.log(`У меня есть ${ballNumber} ${wordBall}.`);
+    let catNumber = 4211;
+    let catWord = declinationOfNumber(catNumber, "котик", "котика", "котиков");
+    console.log(`У меня есть ${catNumber} ${catWord}.`);
+    catNumber = 145789;
+    catWord = declinationOfNumber(catNumber, "котик", "котика", "котиков");
+    console.log(`У меня есть ${catNumber} ${catWord}.`);
+    catNumber = 13;
+    catWord = declinationOfNumber(catNumber, "котик", "котика", "котиков");
+    console.log(`У меня есть ${catNumber} ${catWord}.`);
+    catNumber = 1403;
+    catWord = declinationOfNumber(catNumber, "котик", "котика", "котиков");
+    console.log(`У меня есть ${catNumber} ${catWord}.`);
+    catNumber = 145721;
+    catWord = declinationOfNumber(catNumber, "котик", "котика", "котиков");
+    console.log(`У меня есть ${catNumber} ${catWord}.`);
+  </script>
+</body>
+
+</html>

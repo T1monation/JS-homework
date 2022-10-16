@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+  <script>
+    "use strict";
+
+    const a = parseFloat(prompt('Введите первое число:'));
+    const b = parseFloat(prompt('Введите второе число:'));
+    const operation = prompt('Введите знак операции')
+    console.log(`Введенные числа ${a} и ${b}, знак ${operation}, результат: ${mathOperation(a, b, operation)}`);
+
+
+    /**
+     * Функция для проведения математических операция над двумя числами
+     * @param {number} first Первое число дя математической операции
+     * @param {number} second Второе число для математической операции
+     * @param {string} operation знак математической операции
+     * @returns {number} результат математической операции
+     */
+    function mathOperation(first, second, operation) {
+      let result;
+      if (operation === '+') {
+        result = plus(first, second);
+      } else if (operation === '-') {
+        result = minus(first, second);
+      } else if (operation === '*') {
+        result = mult(first, second);
+      } else if (operation === '/') {
+        result = div(first, second)
+      } else {
+        result = NaN;
+      }
+      return result
+    }
+
+    /**
+     * Функция для сложения двух чисел
+     * @param {number} first Первое число 
+     * @param {number} second Второе число 
+     * @returns {number} результат сложения
+     */
+    function plus(first, second) {
+      return first + second
+    }
+
+    /**
+     * Функция для вычитания двух чисел
+     * @param {number} first Первое число 
+     * @param {number} second Второе число 
+     * @returns {number} результат вычитания
+     */
+    function minus(first, second) {
+      return first - second
+    }
+
+    /**
+     * Функция для умножения двух чисел
+     * @param {number} first Первое число 
+     * @param {number} second Второе число 
+     * @returns {number} результат умножения
+     */
+    function mult(first, second) {
+      return first * second
+    }
+
+    /**
+     * Функция для деления двух чисел
+     * @param {number} first Первое число 
+     * @param {number} second Второе число 
+     * @returns {number} результат деления
+     */
+    function div(first, second) {
+      return first / second
+    }
+  </script>
+</body>
+
+</html>
