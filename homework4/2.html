@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Необязательное задание, но желательно сделать.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
+-->
+  <script>
+    "use strict";
+
+    function getDate() {
+      const now = new Date();
+      return now.toLocaleString()
+    }
+
+
+    // Вариант решения для стиля ES5
+    function PostES5(autor, text) {
+      this.autor = autor;
+      this.text = text;
+      this.time = getDate();
+    }
+
+    PostES5.prototype.editText = function (newText) {
+      this.text = newText;
+      this.time = getDate();
+    }
+
+    PostES5.prototype.editAutor = function (newAutor) {
+      this.autor = newAutor;
+      this.time = getDate();
+    }
+
+    function AttachedPostES5(autor, text, highlighted = false) {
+      PostES5.call(this, autor, text);
+      this.highlighted = highlighted;
+    }
+
+    AttachedPostES5.prototype = Object.create(PostES5.prototype)
+    AttachedPostES5.prototype.constructor = AttachedPostES5;
+
+    AttachedPostES5.prototype.makeTextHighlighted = function () {
+      this.highlighted = true;
+      this.time = getDate();
+    }
+
+    // Ниже идет код для проверки работоспособности для стиля ES5, для наглядности вводил его построчно в консоль 
+    // в консоль вручную, что бы увидеть изменения метки времени
+    const myPost = new PostES5('Timon', 'jfjdjhgkjsndgokjn');
+    console.log(myPost);
+    const myPost2 = new AttachedPostES5('Egor', 'dkjfjfarwerrmkvmkb');
+    console.log(myPost2);
+    myPost2.makeTextHighlighted();
+    console.log(myPost2);
+    myPost2.editAutor('Gendos999');
+    myPost2.editText('DDDDD!!!!');
+    console.log(myPost2);
+
+
+    // Вариант решения для стиля ES6
+
+    class PostES6 {
+      constructor(autor, text) {
+        this.autor = autor;
+        this.text = text;
+        this.time = getDate();
+      }
+
+      editText(newText) {
+        this.text = newText;
+        this.time = getDate();
+      }
+
+      editAutor(newAutor) {
+        this.autor = newAutor;
+        this.time = getDate();
+      }
+    }
+
+    class AttachedPostES6 extends PostES6 {
+      constructor(autor, text, highlighted = false) {
+        super(autor, text);
+        this.highlighted = highlighted;
+      }
+
+      makeTextHighlighted() {
+        this.highlighted = true;
+      }
+    }
+
+    // И снова код для проверки работоспособности
+    const myPost3 = new PostES6('Timon', 'jfjdjhgkjsndgokjn');
+    console.log(myPost3);
+    const myPost4 = new AttachedPostES6('Egor', 'dkjfjfarwerrmkvmkb');
+    console.log(myPost4);
+    myPost4.makeTextHighlighted();
+    console.log(myPost4);
+    myPost4.editAutor('Gendos999');
+    myPost4.editText('DDDDD!!!!');
+    console.log(myPost4);
+
+  </script>
+</body>
+
+</html>
